@@ -28,7 +28,7 @@ char * load_address(uint32_t saddr) {
         return NULL;
     }
 
-    inet_ntop(AF_INET, &saddr, ipaddr, INET_ADDRSTRLEN);	// Convert binary IP to human-readable format
+    inet_ntop(AF_INET, &saddr, ipaddr, INET_ADDRSTRLEN);    // Convert binary IP to human-readable format
     
     if (ipaddr == NULL) {
         fprintf(stderr, "Conversion error");
@@ -43,12 +43,12 @@ uint8_t * load_TTL(char *buffer) {
     uint8_t *ttl = (uint8_t *) malloc(sizeof(uint8_t));
     uint8_t *payload = (uint8_t *) (buffer + sizeof(struct iphdr) + sizeof(struct icmpheader) + sizeof(struct iphdr) + sizeof(struct udphdr);
 
-	if (ttl == NULL) {
+    if (ttl == NULL) {
         fprintf(stderr, "Memory allocation failed");
-		return NULL;
-	}
+        return NULL;
+    }
 
-    *ttl = *payload		// Extract TTL value
+    *ttl = *payload;     // Extract TTL value
 
     return ttl;
 }
@@ -57,14 +57,14 @@ uint8_t * load_TTL(char *buffer) {
 void filter_time_exceed(char *buffer) {
     struct iphdr *ip_hr = (struct iphdr *) (buffer);
     struct icmpheader *icmphdr = (struct icmpheader *) (buffer + sizeof(struct iphdr));
-	char *ipaddr = load_address(ip_hr->saddr);		// Load source IP address
-	uint8_t *ttl = load_TTL(buffer);				// Load TTL value
+    char *ipaddr = load_address(ip_hr->saddr);      // Load source IP address
+    uint8_t *ttl = load_TTL(buffer);                // Load TTL value
 
     if (ipaddr == NULL || ttl == NULL) return;
 
     if (icmphdr->code == 0 && icmphdr->type == 11) {
         printf("Source address = %s\n", ipaddr);
-		printf("TTL = %d\n\n", *ttl);
+        printf("TTL = %d\n\n", *ttl);
     }
     
     free(ipaddr);
@@ -75,18 +75,18 @@ void filter_time_exceed(char *buffer) {
 int main() {
     struct packet_mreq mr;
     char buffer[2048] = {0};
-    int sock = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);	// Create raw socket for ICMP packets
+    int sock = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);     // Create raw socket for ICMP packets
     size_t data_size = 0;
     
     mr.mr_type = PACKET_MR_PROMISC;
-    setsockopt(sock, SOL_PACKET, PACKET_ADD_MEMBERSHIP, &mr, sizeof(mr));	// Set socket options
+    setsockopt(sock, SOL_PACKET, PACKET_ADD_MEMBERSHIP, &mr, sizeof(mr));   // Set socket options
     
     while (true) {
         bzero(buffer, 2048);
         data_size = recvfrom(sock, buffer, 2048, 0, NULL, NULL);
         
         if (data_size > 0) {
-            filter_time_exceed(buffer);  // Filter and process time exceeded packets
+            filter_time_exceed(buffer);     // Filter and process time exceeded packets
         }
     }
     

@@ -67,7 +67,7 @@ int main() {
     for (unsigned int ttl = 1; ttl <= 64; ++ ttl) {
         send_packet(ttl);
         printf("Packet sent with TTL: %d\n", ttl);
-        usleep(1000000);		// Delay between packets (1 second(s))
+        usleep(1000000);        // Delay between packets (1 second(s))
     }
 
     return 0;
