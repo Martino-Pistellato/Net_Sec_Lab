@@ -30,7 +30,7 @@ void main()
     {
         bzero(buf, 1500);
         read(sock, buf, 1500);
-        printf("%S\n", buf);
+        printf("%s\n", buf);
     }
     close(sock);
 }
