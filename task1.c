@@ -7,9 +7,9 @@
 #include <netinet/udp.h>
 #include <arpa/inet.h>
 
-#define SRC_IP "10.0.2.15"	// Change It to your respective IP address
-#define DST_IP "8.8.8.8"
-#define DST_PORT 53
+#define SRC_IP "127.0.0.1"	// Change It to your respective IP address
+#define DST_IP "127.0.0.1"
+#define DST_PORT 8080
 
 
 /* gcc task1.c -o task1 */
