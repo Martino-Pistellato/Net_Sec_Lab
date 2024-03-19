@@ -52,7 +52,6 @@ void send_packet(int ttl) {
     char * payload = packet + sizeof(struct iphdr) + sizeof(struct udphdr);
     *payload = ttl;
 
-    // Send the packet
     dest_addr.sin_family = AF_INET;
     dest_addr.sin_port = htons(DST_PORT);
     dest_addr.sin_addr.s_addr = inet_addr(DST_IP);
@@ -60,7 +59,6 @@ void send_packet(int ttl) {
     // Send packet to destination
     sendto(sockfd, packet, sizeof(struct iphdr) + sizeof(struct udphdr) + 1, 0, (struct sockaddr *)&dest_addr, sizeof(dest_addr));
 
-    // Close socket
     close(sockfd);
 }
 
@@ -69,7 +67,7 @@ int main() {
     for (unsigned int ttl = 1; ttl <= 64; ++ ttl) {
         send_packet(ttl);
         printf("Packet sent with TTL: %d\n", ttl);
-        usleep(500000);		// Delay between packets (0.5 seconds)
+        usleep(1000000);		// Delay between packets (1 second(s))
     }
 
     return 0;
