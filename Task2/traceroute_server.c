@@ -41,7 +41,7 @@ char * load_address(uint32_t saddr) {
 
 uint8_t * load_TTL(char *buffer) {
     uint8_t *ttl = (uint8_t *) malloc(sizeof(uint8_t));
-    uint8_t *payload = (uint8_t *) (buffer + sizeof(struct iphdr) + sizeof(struct icmpheader) + sizeof(struct iphdr) + sizeof(struct udphdr);
+    uint8_t *payload = (uint8_t *) (buffer + sizeof(struct iphdr) + sizeof(struct icmpheader) + sizeof(struct iphdr) + sizeof(struct udphdr));
 
     if (ttl == NULL) {
         fprintf(stderr, "Memory allocation failed");
