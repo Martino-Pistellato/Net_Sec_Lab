@@ -1,0 +1,349 @@
+services:
+  # MAIN ROUTER
+  main-router:
+    container_name: main-router
+    image: "alpine:latest"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    networks:
+      - main-network
+      - subnet1
+      - subnet2
+      - subnet3
+      - subnet4
+
+  # SUBNET 1
+  sub1-router:
+    container_name: sub1-router
+    image: "alpine:latest"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    networks:
+      - subnet1
+
+  sub1-ubu12:
+    container_name: sub1-ubu12
+    image: "ubuntu:12.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet1
+  
+  sub1-ubu14:
+    container_name: sub1-ubu14
+    image: "ubuntu:14.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet1
+  
+  sub1-ubu16:
+    container_name: sub1-ubu16
+    image: "ubuntu:16.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet1
+    
+  sub1-ubu18:
+    container_name: sub1-ubu18
+    image: "ubuntu:18.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet1
+  
+  sub1-ubu20:
+    container_name: sub1-ubu20
+    image: "ubuntu:20.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet1
+  
+  sub1-ubu22:
+    container_name: sub1-ubu22
+    image: "ubuntu:22.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet1
+
+  # SUBNET 2
+  sub2-router:
+    container_name: sub2-router
+    image: "alpine:latest"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    networks:
+      - subnet2
+    
+  sub2-ubu12:
+    container_name: sub2-ubu12
+    image: "ubuntu:12.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet2
+  
+  sub2-ubu14:
+    container_name: sub2-ubu14
+    image: "ubuntu:14.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet2
+  
+  sub2-ubu16:
+    container_name: sub2-ubu16
+    image: "ubuntu:16.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet2
+    
+  sub2-ubu18:
+    container_name: sub2-ubu18
+    image: "ubuntu:18.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet2
+  
+  sub2-ubu20:
+    container_name: sub2-ubu20
+    image: "ubuntu:20.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet2
+  
+  sub2-ubu22:
+    container_name: sub2-ubu22
+    image: "ubuntu:22.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet2
+
+  # SUBNET 3
+  sub3-router:
+    container_name: sub3-router
+    image: "alpine:latest"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    networks:
+      - subnet3
+
+  sub3-ubu12:
+    container_name: sub3-ubu12
+    image: "ubuntu:12.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet3
+  
+  sub3-ubu14:
+    container_name: sub3-ubu14
+    image: "ubuntu:14.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet3
+  
+  sub3-ubu16:
+    container_name: sub3-ubu16
+    image: "ubuntu:16.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet3
+    
+  sub3-ubu18:
+    container_name: sub3-ubu18
+    image: "ubuntu:18.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet3
+  
+  sub3-ubu20:
+    container_name: sub3-ubu20
+    image: "ubuntu:20.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet3
+  
+  sub3-ubu22:
+    container_name: sub3-ubu22
+    image: "ubuntu:22.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet3
+
+  # SUBNET 4
+  sub4-router:
+    container_name: sub4-router
+    image: "alpine:latest"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    networks:
+      - subnet4
+
+  sub4-ubu12:
+    container_name: sub4-ubu12
+    image: "ubuntu:12.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet4
+  
+  sub4-ubu14:
+    container_name: sub4-ubu14
+    image: "ubuntu:14.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet4
+  
+  sub4-ubu16:
+    container_name: sub4-ubu16
+    image: "ubuntu:16.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet4
+    
+  sub4-ubu18:
+    container_name: sub4-ubu18
+    image: "ubuntu:18.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet4
+  
+  sub4-ubu20:
+    container_name: sub4-ubu20
+    image: "ubuntu:20.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet4
+  
+  sub4-ubu22:
+    container_name: sub4-ubu22
+    image: "ubuntu:22.04"
+    restart: unless-stopped
+    command: /bin/sh -c "while true; do sleep 1000; done"
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      - subnet4
+
+networks:
+  main-network:
+    driver: bridge
+  subnet1:
+    driver: bridge
+  subnet2:
+    driver: bridge
+  subnet3:
+    driver: bridge
+  subnet4:
+    driver: bridge
