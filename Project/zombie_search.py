@@ -15,7 +15,7 @@ def generate_random_ip():
 
 def search_zombies_illegal(limit=1):
     # ports = [21, 22, 80, 443, 632]
-    ports = [4242]
+    ports = [80]
     possible_candidate = set()
     
     TCP_SYN_ACK = 0x02 | 0x10
@@ -28,7 +28,7 @@ def search_zombies_illegal(limit=1):
     
     for _ in range(limit):
         # ip = generate_random_ip()
-        ip = "tcpbin.com" 
+        ip = "45.33.32.156" 
         for port in ports:
             SYN = scapy.IP(dst=ip)/scapy.TCP(dport=port, flags='S', seq=1000)
             response = scapy.sr1(SYN, timeout=4, verbose=True)
@@ -38,7 +38,7 @@ def search_zombies_illegal(limit=1):
                     possible_candidate.add((ip, port))
                 
     
-    print(possible_candidate)
+    return possible_candidate
 
 def select_candidate(os_name: str, accuracy):
     if accuracy != "100":
@@ -76,7 +76,9 @@ def nmap_os_detection(ip):
         os_match = res["scan"][ip]["osmatch"][0]
         os_name = os_match["name"]
         accuracy = os_match["osclass"][0]["accuracy"]
-        
+        print(os_name)
+        print(accuracy)
+
         return select_candidate(os_name, accuracy)
     except:
         return 0
@@ -95,8 +97,11 @@ def get_zombies(candidates):
     return zombies
     
 def main():
-    # candidates = search_zombies_illegal() 
-    zombies = get_zombies([("127.0.0.1", "5000"), ("127.0.0.1", "443")])
+    candidates = search_zombies_illegal() 
+    """
+    45.33.32.156 is scanme.nmap.org, you can scan it, idk ab
+    """
+    zombies = get_zombies(candidates)
     print(zombies)
    
             
