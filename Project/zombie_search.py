@@ -72,11 +72,14 @@ def nmap_os_detection(ip):
     res = nm.scan(hosts=ip, timeout=60, arguments="-O")
     # with open("res.json", 'w') as f:
     #     json.dump(res,f)
-    os_match = res["scan"][ip]["osmatch"][0]
-    os_name = os_match["name"]
-    accuracy = os_match["osclass"][0]["accuracy"]
-    
-    return select_candidate(os_name, accuracy)
+    try:
+        os_match = res["scan"][ip]["osmatch"][0]
+        os_name = os_match["name"]
+        accuracy = os_match["osclass"][0]["accuracy"]
+        
+        return select_candidate(os_name, accuracy)
+    except:
+        return 0
     
     
 def get_zombies(candidates):
