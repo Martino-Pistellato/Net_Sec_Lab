@@ -1,16 +1,23 @@
+### CONTAINERS ###
 services:
-  # MAIN ROUTER
+
+  #MAIN ROUTER
   main-router:
     container_name: main-router
     image: "alpine:latest"
     restart: unless-stopped
     command: /bin/sh -c "while true; do sleep 1000; done"
     networks:
-      - main-network
-      - subnet1
-      - subnet2
-      - subnet3
-      - subnet4
+      main-network:
+        ipv4_address: 172.254.0.254
+      subnet1:
+        ipv4_address: 172.1.0.254
+      subnet2:
+        ipv4_address: 172.2.0.254
+      subnet3:
+        ipv4_address: 172.3.0.254
+      subnet4:
+        ipv4_address: 172.4.0.254
 
   # SUBNET 1
   sub1-router:
@@ -19,7 +26,8 @@ services:
     restart: unless-stopped
     command: /bin/sh -c "while true; do sleep 1000; done"
     networks:
-      - subnet1
+      subnet1:
+        ipv4_address: 172.1.0.100 
 
   sub1-ubu12:
     container_name: sub1-ubu12
@@ -31,7 +39,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet1
+      subnet1:
+        ipv4_address: 172.1.0.12
   
   sub1-ubu14:
     container_name: sub1-ubu14
@@ -43,7 +52,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet1
+      subnet1:
+        ipv4_address: 172.1.0.14
   
   sub1-ubu16:
     container_name: sub1-ubu16
@@ -55,7 +65,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet1
+      subnet1:
+        ipv4_address: 172.1.0.16
     
   sub1-ubu18:
     container_name: sub1-ubu18
@@ -67,7 +78,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet1
+      subnet1:
+        ipv4_address: 172.1.0.18
   
   sub1-ubu20:
     container_name: sub1-ubu20
@@ -79,7 +91,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet1
+      subnet1:
+        ipv4_address: 172.1.0.20
   
   sub1-ubu22:
     container_name: sub1-ubu22
@@ -91,7 +104,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet1
+      subnet1:
+        ipv4_address: 172.1.0.22
 
   # SUBNET 2
   sub2-router:
@@ -100,7 +114,8 @@ services:
     restart: unless-stopped
     command: /bin/sh -c "while true; do sleep 1000; done"
     networks:
-      - subnet2
+      subnet2:
+        ipv4_address: 172.2.0.100
     
   sub2-ubu12:
     container_name: sub2-ubu12
@@ -112,7 +127,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet2
+      subnet2:
+        ipv4_address: 172.2.0.12
   
   sub2-ubu14:
     container_name: sub2-ubu14
@@ -124,7 +140,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet2
+      subnet2:
+        ipv4_address: 172.2.0.14
   
   sub2-ubu16:
     container_name: sub2-ubu16
@@ -136,7 +153,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet2
+      subnet2:
+        ipv4_address: 172.2.0.16
     
   sub2-ubu18:
     container_name: sub2-ubu18
@@ -148,7 +166,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet2
+      subnet2:
+        ipv4_address: 172.2.0.18
   
   sub2-ubu20:
     container_name: sub2-ubu20
@@ -160,7 +179,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet2
+      subnet2:
+        ipv4_address: 172.2.0.20
   
   sub2-ubu22:
     container_name: sub2-ubu22
@@ -172,7 +192,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet2
+      subnet2:
+        ipv4_address: 172.2.0.22
 
   # SUBNET 3
   sub3-router:
@@ -181,7 +202,8 @@ services:
     restart: unless-stopped
     command: /bin/sh -c "while true; do sleep 1000; done"
     networks:
-      - subnet3
+      subnet3:
+        ipv4_address: 172.3.0.100
 
   sub3-ubu12:
     container_name: sub3-ubu12
@@ -193,7 +215,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet3
+      subnet3:
+        ipv4_address: 172.3.0.12
   
   sub3-ubu14:
     container_name: sub3-ubu14
@@ -205,7 +228,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet3
+      subnet3:
+        ipv4_address: 172.3.0.14
   
   sub3-ubu16:
     container_name: sub3-ubu16
@@ -217,7 +241,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet3
+      subnet3:
+        ipv4_address: 172.3.0.16
     
   sub3-ubu18:
     container_name: sub3-ubu18
@@ -229,7 +254,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet3
+      subnet3:
+        ipv4_address: 172.3.0.18
   
   sub3-ubu20:
     container_name: sub3-ubu20
@@ -241,7 +267,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet3
+      subnet3:
+        ipv4_address: 172.3.0.20
   
   sub3-ubu22:
     container_name: sub3-ubu22
@@ -253,7 +280,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet3
+      subnet3:
+        ipv4_address: 172.3.0.22
 
   # SUBNET 4
   sub4-router:
@@ -262,7 +290,8 @@ services:
     restart: unless-stopped
     command: /bin/sh -c "while true; do sleep 1000; done"
     networks:
-      - subnet4
+      subnet4:
+        ipv4_address: 172.4.0.100
 
   sub4-ubu12:
     container_name: sub4-ubu12
@@ -274,7 +303,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet4
+      subnet4:
+        ipv4_address: 172.4.0.12
   
   sub4-ubu14:
     container_name: sub4-ubu14
@@ -286,7 +316,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet4
+      subnet4:
+        ipv4_address: 172.4.0.14
   
   sub4-ubu16:
     container_name: sub4-ubu16
@@ -298,7 +329,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet4
+      subnet4:
+        ipv4_address: 172.4.0.16
     
   sub4-ubu18:
     container_name: sub4-ubu18
@@ -310,7 +342,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet4
+      subnet4:
+        ipv4_address: 172.4.0.18
   
   sub4-ubu20:
     container_name: sub4-ubu20
@@ -322,7 +355,8 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet4
+      subnet4:
+        ipv4_address: 172.4.0.20
   
   sub4-ubu22:
     container_name: sub4-ubu22
@@ -334,16 +368,40 @@ services:
         source: ./shared
         target: /shared
     networks:
-      - subnet4
+      subnet4:
+        ipv4_address: 172.4.0.22
 
+
+
+### NETWORKS ###
 networks:
   main-network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.254.0.0/16
+          gateway: 172.254.0.1
   subnet1:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.1.0.0/16
+          gateway: 172.1.0.1
   subnet2:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.2.0.0/16
+          gateway: 172.2.0.1
   subnet3:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.3.0.0/16
+          gateway: 172.3.0.1
   subnet4:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.4.0.0/16
+          gateway: 172.4.0.1
