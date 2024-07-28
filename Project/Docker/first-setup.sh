@@ -12,6 +12,5 @@ docker pull ubuntu:18.04
 docker pull ubuntu:20.04
 docker pull ubuntu:22.04
 
-#build the images and run the containers
-docker compose build
+# build the images and run the containers
 docker compose up

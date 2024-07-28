@@ -1,0 +1,13 @@
+Raccolta dei piant... tentativi e progressi fatti.
+
+1. definizione della rete (vedi immagine sul tablet)
+2. capire che versioni utilizzare di ubuntu
+3. creazione dei container 
+4. impostazione degli ip statici
+5. PROBLEMA: non riusciamo ad impostare il routing corretto sui container
+	i. proviamo uno script per cambiare il routing ma non ci sono i pacchetti necessari (manca il comando `ip` per modificare la route al gateway corretto)
+	ii. decidiamo di utilizzare i Dockerfile, uno per ogni versione dal momento che i passaggi per cambiare il gateway sono diversi tra le varie versioni (banalmente cambia solo la riga con "FROM" per scaricare l'immagine di Ubuntu)
+	iii. lo script non funziona su ubuntu 12.04, è troppo vecchio per fornire i pacchetti necessari a modificare il gateway (i Dockerfile delle altre versioni usano `apt-get` per scaricarsi "iproute2" e "net-tools", ma per la 12.04 non ci sono repository disponibili perché ha raggiunto la End-of-Life (i guess))
+	iv. installiamo manualmente i pacchetti necessari scaricandoli da fonti più datate direttamente sul computer di Gabri, li copiamo nel container e li installiamo da lì
+	v. buldiamo e facciamo cambiare il routing dal docker-compose (farlo dalla bild non funziona perchè non ha i permessi)
+6. Ora funziona tutto, tutto builda e tutto passa per il router che è stato definito nel docker-compose (stonks!)
