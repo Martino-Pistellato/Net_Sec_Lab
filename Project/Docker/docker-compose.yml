@@ -10,28 +10,24 @@ services:
     networks:
       main-network:
         ipv4_address: 172.254.0.254
-      subnet1:
-        ipv4_address: 172.1.0.254
-      subnet2:
-        ipv4_address: 172.2.0.254
-      subnet3:
-        ipv4_address: 172.3.0.254
-      subnet4:
-        ipv4_address: 172.4.0.254
 
   # SUBNET 1
   sub1-router:
     container_name: sub1-router
     image: "alpine:latest"
+    privileged: true
     restart: unless-stopped
     command: /bin/sh -c "while true; do sleep 1000; done"
     networks:
+      main-network:
+        ipv4_address: 172.254.0.5
       subnet1:
         ipv4_address: 172.1.0.100 
 
   sub1-ubu12:
     container_name: sub1-ubu12
     image: "ubuntu:12.04"
+    privileged: true
     restart: unless-stopped
     command: /bin/sh -c "while true; do sleep 1000; done"
     volumes:
@@ -41,6 +37,8 @@ services:
     networks:
       subnet1:
         ipv4_address: 172.1.0.12
+    extra_hosts:
+      - "gateway:172.1.0.100"
   
   sub1-ubu14:
     container_name: sub1-ubu14
@@ -111,9 +109,12 @@ services:
   sub2-router:
     container_name: sub2-router
     image: "alpine:latest"
+    privileged: true
     restart: unless-stopped
     command: /bin/sh -c "while true; do sleep 1000; done"
     networks:
+      main-network:
+          ipv4_address: 172.254.0.2
       subnet2:
         ipv4_address: 172.2.0.100
     
@@ -199,9 +200,12 @@ services:
   sub3-router:
     container_name: sub3-router
     image: "alpine:latest"
+    privileged: true
     restart: unless-stopped
     command: /bin/sh -c "while true; do sleep 1000; done"
     networks:
+      main-network:
+        ipv4_address: 172.254.0.3
       subnet3:
         ipv4_address: 172.3.0.100
 
@@ -287,9 +291,12 @@ services:
   sub4-router:
     container_name: sub4-router
     image: "alpine:latest"
+    privileged: true
     restart: unless-stopped
     command: /bin/sh -c "while true; do sleep 1000; done"
     networks:
+      main-network:
+        ipv4_address: 172.254.0.4
       subnet4:
         ipv4_address: 172.4.0.100
 
@@ -380,28 +387,23 @@ networks:
     ipam:
       config:
         - subnet: 172.254.0.0/16
-          gateway: 172.254.0.1
   subnet1:
     driver: bridge
     ipam:
       config:
         - subnet: 172.1.0.0/16
-          gateway: 172.1.0.1
   subnet2:
     driver: bridge
     ipam:
       config:
         - subnet: 172.2.0.0/16
-          gateway: 172.2.0.1
   subnet3:
     driver: bridge
     ipam:
       config:
         - subnet: 172.3.0.0/16
-          gateway: 172.3.0.1
   subnet4:
     driver: bridge
     ipam:
       config:
         - subnet: 172.4.0.0/16
-          gateway: 172.4.0.1
