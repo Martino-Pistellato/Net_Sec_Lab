@@ -4,19 +4,25 @@ services:
   #MAIN ROUTER
   main-router:
     container_name: main-router
-    image: "alpine:latest"
+    image: "ubuntu:22.04"
+    privileged: true
     restart: unless-stopped
     command: /bin/sh -c "while true; do sleep 1000; done"
     networks:
       main-network:
         ipv4_address: 172.254.0.254
+      internet:
+        ipv4_address: 172.0.0.254
 
   # SUBNET 1
   sub1-router:
+    build:
+        dockerfile: Dockerfile/routers/Dockerfile
     container_name: sub1-router
-    image: "alpine:latest"
+    image: "ubuntu:22.04"
     privileged: true
     restart: unless-stopped
+    #command: /bin/sh -c "./usr/local/bin/add_route.sh && while true; do sleep 1000; done"
     command: /bin/sh -c "while true; do sleep 1000; done"
     networks:
       main-network:
@@ -40,21 +46,21 @@ services:
       subnet1:
         ipv4_address: 172.1.0.12
 
-  sub1-ubu14:
-    build:
-      dockerfile: Dockerfile/14.04/Dockerfile
-    container_name: sub1-ubu14
-    image: "ubuntu:14.04"
-    privileged: true
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done" 
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet1:
-        ipv4_address: 172.1.0.14
+  # sub1-ubu14:
+  #   build:
+  #     dockerfile: Dockerfile/14.04/Dockerfile
+  #   container_name: sub1-ubu14
+  #   image: "ubuntu:14.04"
+  #   privileged: true
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "while true; do sleep 1000; done" 
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet1:
+  #       ipv4_address: 172.1.0.14
   
   sub1-ubu16:
     build:
@@ -63,7 +69,7 @@ services:
     image: "ubuntu:16.04"
     privileged: true
     restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+    command: /bin/sh -c "while true; do sleep 1000; done"
     volumes:
       - type: bind
         source: ./shared
@@ -72,385 +78,390 @@ services:
       subnet1:
         ipv4_address: 172.1.0.16
     
-  sub1-ubu18:
-    build:
-      dockerfile: Dockerfile/18.04/Dockerfile
-    container_name: sub1-ubu18
-    image: "ubuntu:18.04"
-    privileged: true
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet1:
-        ipv4_address: 172.1.0.18
+  # sub1-ubu18:
+  #   build:
+  #     dockerfile: Dockerfile/18.04/Dockerfile
+  #   container_name: sub1-ubu18
+  #   image: "ubuntu:18.04"
+  #   privileged: true
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet1:
+  #       ipv4_address: 172.1.0.18
   
-  sub1-ubu20:
-    build:
-      dockerfile: Dockerfile/20.04/Dockerfile
-    container_name: sub1-ubu20
-    image: "ubuntu:20.04"
-    privileged: true
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet1:
-        ipv4_address: 172.1.0.20
+  # sub1-ubu20:
+  #   build:
+  #     dockerfile: Dockerfile/20.04/Dockerfile
+  #   container_name: sub1-ubu20
+  #   image: "ubuntu:20.04"
+  #   privileged: true
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet1:
+  #       ipv4_address: 172.1.0.20
   
-  sub1-ubu22:
-    build:
-      dockerfile: Dockerfile/22.04/Dockerfile
-    container_name: sub1-ubu22
-    image: "ubuntu:22.04"
-    privileged: true
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet1:
-        ipv4_address: 172.1.0.22
+  # sub1-ubu22:
+  #   build:
+  #     dockerfile: Dockerfile/22.04/Dockerfile
+  #   container_name: sub1-ubu22
+  #   image: "ubuntu:22.04"
+  #   privileged: true
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet1:
+  #       ipv4_address: 172.1.0.22
 
-  # SUBNET 2
-  sub2-router:
-    container_name: sub2-router
-    image: "alpine:latest"
-    privileged: true
-    restart: unless-stopped
-    command: /bin/sh -c "while true; do sleep 1000; done"
-    networks:
-      main-network:
-        ipv4_address: 172.254.0.2
-      subnet2:
-        ipv4_address: 172.2.0.100
+  # # SUBNET 2
+  # sub2-router:
+  #   container_name: sub2-router
+  #   image: "alpine:latest"
+  #   privileged: true
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "while true; do sleep 1000; done"
+  #   networks:
+  #     main-network:
+  #       ipv4_address: 172.254.0.2
+  #     subnet2:
+  #       ipv4_address: 172.2.0.100
 
-  sub2-ubu12:
-    build:
-      dockerfile: Dockerfile/12.04/Dockerfile
-    container_name: sub2-ubu12
-    image: "ubuntu:12.04"
-    privileged: true
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done" 
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet2:
-        ipv4_address: 172.2.0.12
+  # sub2-ubu12:
+  #   build:
+  #     dockerfile: Dockerfile/12.04/Dockerfile
+  #   container_name: sub2-ubu12
+  #   image: "ubuntu:12.04"
+  #   privileged: true
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done" 
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet2:
+  #       ipv4_address: 172.2.0.12
 
-  sub2-ubu14:
-    build:
-      dockerfile: Dockerfile/14.04/Dockerfile
-    container_name: sub2-ubu14
-    image: "ubuntu:14.04"
-    restart: unless-stopped
-    privileged: true
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet2:
-        ipv4_address: 172.2.0.14
+  # sub2-ubu14:
+  #   build:
+  #     dockerfile: Dockerfile/14.04/Dockerfile
+  #   container_name: sub2-ubu14
+  #   image: "ubuntu:14.04"
+  #   restart: unless-stopped
+  #   privileged: true
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet2:
+  #       ipv4_address: 172.2.0.14
   
-  sub2-ubu16:
-    build:
-      dockerfile: Dockerfile/16.04/Dockerfile
-    container_name: sub2-ubu16
-    image: "ubuntu:16.04"
-    restart: unless-stopped
-    privileged: true
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet2:
-        ipv4_address: 172.2.0.16
+  # sub2-ubu16:
+  #   build:
+  #     dockerfile: Dockerfile/16.04/Dockerfile
+  #   container_name: sub2-ubu16
+  #   image: "ubuntu:16.04"
+  #   restart: unless-stopped
+  #   privileged: true
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet2:
+  #       ipv4_address: 172.2.0.16
     
-  sub2-ubu18:
-    build:
-      dockerfile: Dockerfile/18.04/Dockerfile
-    container_name: sub2-ubu18
-    image: "ubuntu:18.04"
-    restart: unless-stopped
-    privileged: true
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet2:
-        ipv4_address: 172.2.0.18
+  # sub2-ubu18:
+  #   build:
+  #     dockerfile: Dockerfile/18.04/Dockerfile
+  #   container_name: sub2-ubu18
+  #   image: "ubuntu:18.04"
+  #   restart: unless-stopped
+  #   privileged: true
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet2:
+  #       ipv4_address: 172.2.0.18
   
-  sub2-ubu20:
-    build:
-      dockerfile: Dockerfile/20.04/Dockerfile
-    container_name: sub2-ubu20
-    image: "ubuntu:20.04"
-    restart: unless-stopped
-    privileged: true
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet2:
-        ipv4_address: 172.2.0.20
+  # sub2-ubu20:
+  #   build:
+  #     dockerfile: Dockerfile/20.04/Dockerfile
+  #   container_name: sub2-ubu20
+  #   image: "ubuntu:20.04"
+  #   restart: unless-stopped
+  #   privileged: true
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet2:
+  #       ipv4_address: 172.2.0.20
   
-  sub2-ubu22:
-    build:
-      dockerfile: Dockerfile/22.04/Dockerfile
-    container_name: sub2-ubu22
-    image: "ubuntu:22.04"
-    restart: unless-stopped
-    privileged: true
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet2:
-        ipv4_address: 172.2.0.22
+  # sub2-ubu22:
+  #   build:
+  #     dockerfile: Dockerfile/22.04/Dockerfile
+  #   container_name: sub2-ubu22
+  #   image: "ubuntu:22.04"
+  #   restart: unless-stopped
+  #   privileged: true
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet2:
+  #       ipv4_address: 172.2.0.22
 
-  # SUBNET 3
-  sub3-router:
-    container_name: sub3-router
-    image: "alpine:latest"
-    privileged: true
-    restart: unless-stopped
-    command: /bin/sh -c "while true; do sleep 1000; done"
-    networks:
-      main-network:
-        ipv4_address: 172.254.0.3
-      subnet3:
-        ipv4_address: 172.3.0.100
+  # # SUBNET 3
+  # sub3-router:
+  #   container_name: sub3-router
+  #   image: "alpine:latest"
+  #   privileged: true
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "while true; do sleep 1000; done"
+  #   networks:
+  #     main-network:
+  #       ipv4_address: 172.254.0.3
+  #     subnet3:
+  #       ipv4_address: 172.3.0.100
 
-  sub3-ubu12:
-    build:
-      dockerfile: Dockerfile/12.04/Dockerfile
-    container_name: sub3-ubu12
-    image: "ubuntu:12.04"
-    privileged: true
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done" 
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet3:
-        ipv4_address: 172.3.0.12
+  # sub3-ubu12:
+  #   build:
+  #     dockerfile: Dockerfile/12.04/Dockerfile
+  #   container_name: sub3-ubu12
+  #   image: "ubuntu:12.04"
+  #   privileged: true
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done" 
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet3:
+  #       ipv4_address: 172.3.0.12
   
-  sub3-ubu14:
-    build:
-      dockerfile: Dockerfile/14.04/Dockerfile
-    container_name: sub3-ubu14
-    image: "ubuntu:14.04"
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet3:
-        ipv4_address: 172.3.0.14
-    privileged: true
+  # sub3-ubu14:
+  #   build:
+  #     dockerfile: Dockerfile/14.04/Dockerfile
+  #   container_name: sub3-ubu14
+  #   image: "ubuntu:14.04"
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet3:
+  #       ipv4_address: 172.3.0.14
+  #   privileged: true
   
-  sub3-ubu16:
-    build:
-      dockerfile: Dockerfile/16.04/Dockerfile
-    container_name: sub3-ubu16
-    image: "ubuntu:16.04"
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet3:
-        ipv4_address: 172.3.0.16
-    privileged: true
+  # sub3-ubu16:
+  #   build:
+  #     dockerfile: Dockerfile/16.04/Dockerfile
+  #   container_name: sub3-ubu16
+  #   image: "ubuntu:16.04"
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet3:
+  #       ipv4_address: 172.3.0.16
+  #   privileged: true
     
-  sub3-ubu18:
-    build:
-      dockerfile: Dockerfile/18.04/Dockerfile
-    container_name: sub3-ubu18
-    image: "ubuntu:18.04"
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet3:
-        ipv4_address: 172.3.0.18
-    privileged: true
+  # sub3-ubu18:
+  #   build:
+  #     dockerfile: Dockerfile/18.04/Dockerfile
+  #   container_name: sub3-ubu18
+  #   image: "ubuntu:18.04"
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet3:
+  #       ipv4_address: 172.3.0.18
+  #   privileged: true
   
-  sub3-ubu20:
-    build:
-      dockerfile: Dockerfile/20.04/Dockerfile
-    container_name: sub3-ubu20
-    image: "ubuntu:20.04"
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet3:
-        ipv4_address: 172.3.0.20
-    privileged: true
+  # sub3-ubu20:
+  #   build:
+  #     dockerfile: Dockerfile/20.04/Dockerfile
+  #   container_name: sub3-ubu20
+  #   image: "ubuntu:20.04"
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet3:
+  #       ipv4_address: 172.3.0.20
+  #   privileged: true
   
-  sub3-ubu22:
-    build:
-      dockerfile: Dockerfile/22.04/Dockerfile
-    container_name: sub3-ubu22
-    image: "ubuntu:22.04"
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet3:
-        ipv4_address: 172.3.0.22
-    privileged: true
+  # sub3-ubu22:
+  #   build:
+  #     dockerfile: Dockerfile/22.04/Dockerfile
+  #   container_name: sub3-ubu22
+  #   image: "ubuntu:22.04"
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet3:
+  #       ipv4_address: 172.3.0.22
+  #   privileged: true
 
-  # SUBNET 4
-  sub4-router:
-    container_name: sub4-router
-    image: "alpine:latest"
-    privileged: true
-    restart: unless-stopped
-    command: /bin/sh -c "while true; do sleep 1000; done"
-    networks:
-      main-network:
-        ipv4_address: 172.254.0.4
-      subnet4:
-        ipv4_address: 172.4.0.100
+  # # SUBNET 4
+  # sub4-router:
+  #   container_name: sub4-router
+  #   image: "alpine:latest"
+  #   privileged: true
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "while true; do sleep 1000; done"
+  #   networks:
+  #     main-network:
+  #       ipv4_address: 172.254.0.4
+  #     subnet4:
+  #       ipv4_address: 172.4.0.100
 
-  sub4-ubu12:
-    build:
-      dockerfile: Dockerfile/12.04/Dockerfile
-    container_name: sub4-ubu12
-    image: "ubuntu:12.04"
-    privileged: true
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done" 
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet4:
-        ipv4_address: 172.4.0.12
+  # sub4-ubu12:
+  #   build:
+  #     dockerfile: Dockerfile/12.04/Dockerfile
+  #   container_name: sub4-ubu12
+  #   image: "ubuntu:12.04"
+  #   privileged: true
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done" 
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet4:
+  #       ipv4_address: 172.4.0.12
   
-  sub4-ubu14:
-    build:
-      dockerfile: Dockerfile/14.04/Dockerfile
-    container_name: sub4-ubu14
-    image: "ubuntu:14.04"
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet4:
-        ipv4_address: 172.4.0.14
-    privileged: true
+  # sub4-ubu14:
+  #   build:
+  #     dockerfile: Dockerfile/14.04/Dockerfile
+  #   container_name: sub4-ubu14
+  #   image: "ubuntu:14.04"
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet4:
+  #       ipv4_address: 172.4.0.14
+  #   privileged: true
   
-  sub4-ubu16:
-    build:
-      dockerfile: Dockerfile/16.04/Dockerfile
-    container_name: sub4-ubu16
-    image: "ubuntu:16.04"
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet4:
-        ipv4_address: 172.4.0.16
-    privileged: true
+  # sub4-ubu16:
+  #   build:
+  #     dockerfile: Dockerfile/16.04/Dockerfile
+  #   container_name: sub4-ubu16
+  #   image: "ubuntu:16.04"
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet4:
+  #       ipv4_address: 172.4.0.16
+  #   privileged: true
     
-  sub4-ubu18:
-    build:
-      dockerfile: Dockerfile/18.04/Dockerfile
-    container_name: sub4-ubu18
-    image: "ubuntu:18.04"
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet4:
-        ipv4_address: 172.4.0.18
-    privileged: true
+  # sub4-ubu18:
+  #   build:
+  #     dockerfile: Dockerfile/18.04/Dockerfile
+  #   container_name: sub4-ubu18
+  #   image: "ubuntu:18.04"
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet4:
+  #       ipv4_address: 172.4.0.18
+  #   privileged: true
   
-  sub4-ubu20:
-    build:
-      dockerfile: Dockerfile/20.04/Dockerfile
-    container_name: sub4-ubu20
-    image: "ubuntu:20.04"
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet4:
-        ipv4_address: 172.4.0.20
-    privileged: true
+  # sub4-ubu20:
+  #   build:
+  #     dockerfile: Dockerfile/20.04/Dockerfile
+  #   container_name: sub4-ubu20
+  #   image: "ubuntu:20.04"
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet4:
+  #       ipv4_address: 172.4.0.20
+  #   privileged: true
   
-  sub4-ubu22:
-    build:
-      dockerfile: Dockerfile/22.04/Dockerfile
-    container_name: sub4-ubu22
-    image: "ubuntu:22.04"
-    restart: unless-stopped
-    command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      subnet4:
-        ipv4_address: 172.4.0.22
-    privileged: true
+  # sub4-ubu22:
+  #   build:
+  #     dockerfile: Dockerfile/22.04/Dockerfile
+  #   container_name: sub4-ubu22
+  #   image: "ubuntu:22.04"
+  #   restart: unless-stopped
+  #   command: /bin/sh -c "./usr/local/bin/conf_cont.sh && while true; do sleep 1000; done"
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet4:
+  #       ipv4_address: 172.4.0.22
+  #   privileged: true
 
 
 
 ### NETWORKS ###
 networks:
+  internet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.0.0.0/16
   main-network:
     driver: bridge
     ipam:
@@ -461,18 +472,18 @@ networks:
     ipam:
       config:
         - subnet: 172.1.0.0/16
-  subnet2:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.2.0.0/16
-  subnet3:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.3.0.0/16
-  subnet4:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 172.4.0.0/16
+  # subnet2:
+  #   driver: bridge
+  #   ipam:
+  #     config:
+  #       - subnet: 172.2.0.0/16
+  # subnet3:
+  #   driver: bridge
+  #   ipam:
+  #     config:
+  #       - subnet: 172.3.0.0/16
+  # subnet4:
+  #   driver: bridge
+  #   ipam:
+  #     config:
+  #       - subnet: 172.4.0.0/16
