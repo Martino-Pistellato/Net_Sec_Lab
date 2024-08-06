@@ -11,3 +11,5 @@ Raccolta dei piant... tentativi e progressi fatti.
 	iv. installiamo manualmente i pacchetti necessari scaricandoli da fonti più datate direttamente sul computer di Gabri, li copiamo nel container e li installiamo da lì
 	v. buldiamo e facciamo cambiare il routing dal docker-compose (farlo dalla bild non funziona perchè non ha i permessi)
 6. Ora funziona tutto, tutto builda e tutto passa per il router che è stato definito nel docker-compose (stonks!)
+7. Stiamo testando cosa utilizzare per poter configurare il router centrale dell'intera rete in modo che faccia da router tra le 4 subnets e l'internet.
+   Abbiamo provato a utilizzare `iproute` e `bird` ma senza successo; ora tocca il turno di `frrouting`

@@ -3,8 +3,11 @@ services:
 
   #MAIN ROUTER
   main-router:
+    build:
+      dockerfile: Dockerfile/routers/main_router/Dockerfile
     container_name: main-router
-    image: "ubuntu:22.04"
+    # image: "ubuntu:22.04"
+    image: "frrouting/frr:latest"
     privileged: true
     restart: unless-stopped
     command: /bin/sh -c "while true; do sleep 1000; done"
@@ -17,7 +20,7 @@ services:
   # SUBNET 1
   sub1-router:
     build:
-        dockerfile: Dockerfile/routers/Dockerfile
+      dockerfile: Dockerfile/routers/subnet_router/Dockerfile
     container_name: sub1-router
     image: "ubuntu:22.04"
     privileged: true
@@ -32,7 +35,7 @@ services:
 
   sub1-ubu12:
     build:
-      dockerfile: Dockerfile/12.04/Dockerfile
+      dockerfile: Dockerfile/hosts/12.04/Dockerfile
     container_name: sub1-ubu12
     image: "ubuntu:12.04"
     privileged: true
@@ -48,7 +51,7 @@ services:
 
   # sub1-ubu14:
   #   build:
-  #     dockerfile: Dockerfile/14.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/14.04/Dockerfile
   #   container_name: sub1-ubu14
   #   image: "ubuntu:14.04"
   #   privileged: true
@@ -64,7 +67,7 @@ services:
   
   sub1-ubu16:
     build:
-      dockerfile: Dockerfile/16.04/Dockerfile
+      dockerfile: Dockerfile/hosts/16.04/Dockerfile
     container_name: sub1-ubu16
     image: "ubuntu:16.04"
     privileged: true
@@ -80,7 +83,7 @@ services:
     
   # sub1-ubu18:
   #   build:
-  #     dockerfile: Dockerfile/18.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/18.04/Dockerfile
   #   container_name: sub1-ubu18
   #   image: "ubuntu:18.04"
   #   privileged: true
@@ -96,7 +99,7 @@ services:
   
   # sub1-ubu20:
   #   build:
-  #     dockerfile: Dockerfile/20.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/20.04/Dockerfile
   #   container_name: sub1-ubu20
   #   image: "ubuntu:20.04"
   #   privileged: true
@@ -112,7 +115,7 @@ services:
   
   # sub1-ubu22:
   #   build:
-  #     dockerfile: Dockerfile/22.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/22.04/Dockerfile
   #   container_name: sub1-ubu22
   #   image: "ubuntu:22.04"
   #   privileged: true
@@ -141,7 +144,7 @@ services:
 
   # sub2-ubu12:
   #   build:
-  #     dockerfile: Dockerfile/12.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/12.04/Dockerfile
   #   container_name: sub2-ubu12
   #   image: "ubuntu:12.04"
   #   privileged: true
@@ -157,7 +160,7 @@ services:
 
   # sub2-ubu14:
   #   build:
-  #     dockerfile: Dockerfile/14.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/14.04/Dockerfile
   #   container_name: sub2-ubu14
   #   image: "ubuntu:14.04"
   #   restart: unless-stopped
@@ -173,7 +176,7 @@ services:
   
   # sub2-ubu16:
   #   build:
-  #     dockerfile: Dockerfile/16.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/16.04/Dockerfile
   #   container_name: sub2-ubu16
   #   image: "ubuntu:16.04"
   #   restart: unless-stopped
@@ -189,7 +192,7 @@ services:
     
   # sub2-ubu18:
   #   build:
-  #     dockerfile: Dockerfile/18.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/18.04/Dockerfile
   #   container_name: sub2-ubu18
   #   image: "ubuntu:18.04"
   #   restart: unless-stopped
@@ -205,7 +208,7 @@ services:
   
   # sub2-ubu20:
   #   build:
-  #     dockerfile: Dockerfile/20.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/20.04/Dockerfile
   #   container_name: sub2-ubu20
   #   image: "ubuntu:20.04"
   #   restart: unless-stopped
@@ -221,7 +224,7 @@ services:
   
   # sub2-ubu22:
   #   build:
-  #     dockerfile: Dockerfile/22.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/22.04/Dockerfile
   #   container_name: sub2-ubu22
   #   image: "ubuntu:22.04"
   #   restart: unless-stopped
@@ -250,7 +253,7 @@ services:
 
   # sub3-ubu12:
   #   build:
-  #     dockerfile: Dockerfile/12.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/12.04/Dockerfile
   #   container_name: sub3-ubu12
   #   image: "ubuntu:12.04"
   #   privileged: true
@@ -266,7 +269,7 @@ services:
   
   # sub3-ubu14:
   #   build:
-  #     dockerfile: Dockerfile/14.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/14.04/Dockerfile
   #   container_name: sub3-ubu14
   #   image: "ubuntu:14.04"
   #   restart: unless-stopped
@@ -282,7 +285,7 @@ services:
   
   # sub3-ubu16:
   #   build:
-  #     dockerfile: Dockerfile/16.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/16.04/Dockerfile
   #   container_name: sub3-ubu16
   #   image: "ubuntu:16.04"
   #   restart: unless-stopped
@@ -298,7 +301,7 @@ services:
     
   # sub3-ubu18:
   #   build:
-  #     dockerfile: Dockerfile/18.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/18.04/Dockerfile
   #   container_name: sub3-ubu18
   #   image: "ubuntu:18.04"
   #   restart: unless-stopped
@@ -314,7 +317,7 @@ services:
   
   # sub3-ubu20:
   #   build:
-  #     dockerfile: Dockerfile/20.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/20.04/Dockerfile
   #   container_name: sub3-ubu20
   #   image: "ubuntu:20.04"
   #   restart: unless-stopped
@@ -330,7 +333,7 @@ services:
   
   # sub3-ubu22:
   #   build:
-  #     dockerfile: Dockerfile/22.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/22.04/Dockerfile
   #   container_name: sub3-ubu22
   #   image: "ubuntu:22.04"
   #   restart: unless-stopped
@@ -359,7 +362,7 @@ services:
 
   # sub4-ubu12:
   #   build:
-  #     dockerfile: Dockerfile/12.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/12.04/Dockerfile
   #   container_name: sub4-ubu12
   #   image: "ubuntu:12.04"
   #   privileged: true
@@ -375,7 +378,7 @@ services:
   
   # sub4-ubu14:
   #   build:
-  #     dockerfile: Dockerfile/14.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/14.04/Dockerfile
   #   container_name: sub4-ubu14
   #   image: "ubuntu:14.04"
   #   restart: unless-stopped
@@ -391,7 +394,7 @@ services:
   
   # sub4-ubu16:
   #   build:
-  #     dockerfile: Dockerfile/16.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/16.04/Dockerfile
   #   container_name: sub4-ubu16
   #   image: "ubuntu:16.04"
   #   restart: unless-stopped
@@ -407,7 +410,7 @@ services:
     
   # sub4-ubu18:
   #   build:
-  #     dockerfile: Dockerfile/18.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/18.04/Dockerfile
   #   container_name: sub4-ubu18
   #   image: "ubuntu:18.04"
   #   restart: unless-stopped
@@ -423,7 +426,7 @@ services:
   
   # sub4-ubu20:
   #   build:
-  #     dockerfile: Dockerfile/20.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/20.04/Dockerfile
   #   container_name: sub4-ubu20
   #   image: "ubuntu:20.04"
   #   restart: unless-stopped
@@ -439,7 +442,7 @@ services:
   
   # sub4-ubu22:
   #   build:
-  #     dockerfile: Dockerfile/22.04/Dockerfile
+  #     dockerfile: Dockerfile/hosts/22.04/Dockerfile
   #   container_name: sub4-ubu22
   #   image: "ubuntu:22.04"
   #   restart: unless-stopped

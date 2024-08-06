@@ -2,8 +2,8 @@
 FROM ubuntu:12.04
 
 # Copy packages to the container
-COPY Dockerfile/12.04/iproute_20111117-1ubuntu2_amd64.deb /usr/local/bin/iproute_20111117-1ubuntu2_amd64.deb
-COPY Dockerfile/12.04/net-tools_1.60-24.2ubuntu1_amd64.deb /usr/local/bin/net-tools_1.60-24.2ubuntu1_amd64.deb
+COPY Dockerfile/hosts/12.04/iproute_20111117-1ubuntu2_amd64.deb /usr/local/bin/iproute_20111117-1ubuntu2_amd64.deb
+COPY Dockerfile/hosts/12.04/net-tools_1.60-24.2ubuntu1_amd64.deb /usr/local/bin/net-tools_1.60-24.2ubuntu1_amd64.deb
 
 # Install packages
 RUN dpkg -i /usr/local/bin/net-tools_1.60-24.2ubuntu1_amd64.deb
@@ -14,7 +14,7 @@ RUN rm /usr/local/bin/net-tools_1.60-24.2ubuntu1_amd64.deb
 RUN rm /usr/local/bin/iproute_20111117-1ubuntu2_amd64.deb
 
 # Add the startup script to the container
-COPY Dockerfile/conf_cont.sh /usr/local/bin/conf_cont.sh
+COPY Dockerfile/hosts/conf_cont.sh /usr/local/bin/conf_cont.sh
 
 # Make the script executable
 RUN chmod +x /usr/local/bin/conf_cont.sh

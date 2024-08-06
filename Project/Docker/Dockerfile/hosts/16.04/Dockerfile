@@ -5,10 +5,13 @@ FROM ubuntu:16.04
 ### The following snippet installs packets for classic routing (that is not working)
 # Update the package list and install iproute2 and other necessary tools
 RUN apt-get update && apt-get install -y iproute2 net-tools
+
 # Add the startup script to the container
-COPY Dockerfile/conf_cont.sh /usr/local/bin/conf_cont.sh
+COPY Dockerfile/hosts/conf_cont.sh /usr/local/bin/conf_cont.sh
+
 # Make the script executable
 RUN chmod +x /usr/local/bin/conf_cont.sh
+
 ###
 
 ### Install prerequistes, add repo for bird2 an install it

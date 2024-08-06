@@ -16,7 +16,7 @@ RUN apt-get update && \
     add-apt-repository ppa:cz.nic-labs/bird && \
     apt-get update
 # Add the startup script to the container
-COPY Dockerfile/conf_cont.sh /usr/local/bin/conf_cont.sh
+COPY Dockerfile/hosts/conf_cont.sh /usr/local/bin/conf_cont.sh
 
 # Make the script executable
 RUN chmod +x /usr/local/bin/conf_cont.sh
