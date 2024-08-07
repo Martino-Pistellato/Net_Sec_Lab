@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Get the IP address of the eth0 interface
-IP_ADDR=$(ip -4 addr show dev eth0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+IP_ADDR=$(ip -4 addr show dev eth0 | grep -Eo 'inet [0-9]+\.[0-9]+\.[0-9]+\.[0-9]+' | awk '{print $2}')
 
 # Extract the subnet part (first three octets)
 SUBNET=$(echo $IP_ADDR | cut -d '.' -f 1-3)

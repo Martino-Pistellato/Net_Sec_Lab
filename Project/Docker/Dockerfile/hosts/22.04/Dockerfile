@@ -9,3 +9,5 @@ COPY Dockerfile/hosts/conf_cont.sh /usr/local/bin/conf_cont.sh
 
 # Make the script executable
 RUN chmod +x /usr/local/bin/conf_cont.sh
+
+CMD ["/bin/bash", "-c", "/usr/local/bin/conf_cont.sh && sleep infinity"]

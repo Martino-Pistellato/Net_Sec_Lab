@@ -3,10 +3,10 @@ FROM frrouting/frr:latest
 
 # Copy the FRR configuration file into the container
 COPY Dockerfile/routers/main_router/frr.conf /etc/frr/frr.conf
+COPY Dockerfile/routers/main_router/enable_nat.sh /usr/local/bin/enable_nat.sh
 
-# Expose ports for FRR (optional, for management purposes)
-EXPOSE 2601 2602 2603 2604 2605
+# Configure permissions
+RUN chmod +x /usr/local/bin/enable_nat.sh
 
-# Start FRR services
-CMD ["zebra", "bgpd", "ospfd", "ospf6d", "isisd", "ripd", "ripngd", "pimd", "ldpd", "nhrpd", "eigrpd", "bfdd", "vrrpd"]
-# CMD ["zebra"]
+# Run configuration script and sleep
+CMD ["/bin/bash", "-c", "/usr/local/bin/enable_nat.sh && sleep infinity"]

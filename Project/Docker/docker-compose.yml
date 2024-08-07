@@ -1,15 +1,13 @@
 ### CONTAINERS ###
 services:
 
-  #MAIN ROUTER
+  # MAIN ROUTER
   main-router:
     build:
       dockerfile: Dockerfile/routers/main_router/Dockerfile
     container_name: main-router
-    image: "frrouting/frr:latest"
     privileged: true
     restart: unless-stopped
-    command: /bin/sh -c "while true; do sleep 1000; done"
     networks:
       main-network:
         ipv4_address: 172.254.0.254
@@ -21,10 +19,8 @@ services:
     build:
       dockerfile: Dockerfile/routers/subnet_router/subnet1/Dockerfile
     container_name: sub1-router
-    image: "frrouting/frr:latest"
     privileged: true
     restart: unless-stopped
-    command: /bin/sh -c "while true; do sleep 1000; done"
     networks:
       main-network:
         ipv4_address: 172.254.0.5
@@ -115,10 +111,8 @@ services:
     build:
       dockerfile: Dockerfile/hosts/22.04/Dockerfile
     container_name: sub1-ubu22
-    image: "ubuntu:22.04"
     privileged: true
     restart: unless-stopped
-    command: /bin/sh -c "while true; do sleep 1000; done"
     volumes:
       - type: bind
         source: ./shared

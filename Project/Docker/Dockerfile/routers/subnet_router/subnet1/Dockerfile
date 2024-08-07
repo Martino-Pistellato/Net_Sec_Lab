@@ -3,10 +3,10 @@ FROM frrouting/frr:latest
 
 # Copy the FRR configuration file into the container
 COPY Dockerfile/routers/subnet_router/subnet1/frr.conf /etc/frr/frr.conf
+COPY Dockerfile/routers/subnet_router/conf_router.sh /usr/local/bin/conf_router.sh
 
-# Expose ports for FRR (optional, for management purposes)
-EXPOSE 2601 2602 2603 2604 2605
+# Configure permissions
+RUN chmod +x /usr/local/bin/conf_router.sh
 
-# Start FRR services
-CMD ["zebra", "bgpd", "ospfd", "ospf6d", "isisd", "ripd", "ripngd", "pimd", "ldpd", "nhrpd", "eigrpd", "bfdd", "vrrpd"]
-# CMD ["zebra"]
+# Run configuration script and sleep
+CMD ["/bin/bash", "-c", "/usr/local/bin/conf_router.sh && sleep infinity"]
