@@ -2,7 +2,7 @@
 FROM ubuntu:22.04
 
 # Update the package list and install iproute2 and other necessary tools
-RUN apt-get update && apt-get install -y iproute2 net-tools
+RUN apt-get update && apt-get install -y iproute2 net-tools iputils-ping traceroute nano
 
 # Add the startup script to the container
 COPY Dockerfile/hosts/conf_cont.sh /usr/local/bin/conf_cont.sh
