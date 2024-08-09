@@ -14,20 +14,20 @@ services:
       internet:
         ipv4_address: 172.0.0.254
 
-  # ATTACKER
-  # attacker:
-  #   build:
-  #     dockerfile: Dockerfile/attacker/Dockerfile
-  #   container_name: attacker
-  #   privileged: true
-  #   restart: unless-stopped
-  #   volumes:
-  #     - type: bind
-  #       source: ./shared
-  #       target: /shared
-  #   networks:
-  #     subnet1:
-  #       ipv4_address: 172.1.0.200
+#ATTACKER
+  attacker:
+    build:
+      dockerfile: Dockerfile/attacker/Dockerfile
+    container_name: attacker
+    privileged: true
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: ./shared
+        target: /shared
+    networks:
+      subnet1:
+        ipv4_address: 172.0.1.200
 
   # SUBNET 1
   sub1-router:
