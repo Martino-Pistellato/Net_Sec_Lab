@@ -10,24 +10,24 @@ services:
     restart: unless-stopped
     networks:
       main-network:
-        ipv4_address: 172.254.0.254
+        ipv4_address: 172.0.254.254
       internet:
         ipv4_address: 172.0.0.254
 
   # ATTACKER
-  attacker:
-    build:
-      dockerfile: Dockerfile/attacker/Dockerfile
-    container_name: attacker
-    privileged: true
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      main-network:
-        ipv4_address: 172.254.0.200
+  # attacker:
+  #   build:
+  #     dockerfile: Dockerfile/attacker/Dockerfile
+  #   container_name: attacker
+  #   privileged: true
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     subnet1:
+  #       ipv4_address: 172.1.0.200
 
   # SUBNET 1
   sub1-router:
@@ -38,9 +38,9 @@ services:
     restart: unless-stopped
     networks:
       main-network:
-        ipv4_address: 172.254.0.5
+        ipv4_address: 172.0.254.5
       subnet1:
-        ipv4_address: 172.1.0.100
+        ipv4_address: 172.0.1.100
 
   sub1-ubu12:
     build:
@@ -54,7 +54,7 @@ services:
         target: /shared
     networks:
       subnet1:
-        ipv4_address: 172.1.0.12
+        ipv4_address: 172.0.1.12
 
   sub1-ubu14:
     build:
@@ -68,7 +68,7 @@ services:
         target: /shared
     networks:
       subnet1:
-        ipv4_address: 172.1.0.14
+        ipv4_address: 172.0.1.14
   
   sub1-ubu16:
     build:
@@ -82,7 +82,7 @@ services:
         target: /shared
     networks:
       subnet1:
-        ipv4_address: 172.1.0.16
+        ipv4_address: 172.0.1.16
     
   sub1-ubu18:
     build:
@@ -96,7 +96,7 @@ services:
         target: /shared
     networks:
       subnet1:
-        ipv4_address: 172.1.0.18
+        ipv4_address: 172.0.1.18
   
   sub1-ubu20:
     build:
@@ -110,7 +110,7 @@ services:
         target: /shared
     networks:
       subnet1:
-        ipv4_address: 172.1.0.20
+        ipv4_address: 172.0.1.20
   
   sub1-ubu22:
     build:
@@ -124,7 +124,7 @@ services:
         target: /shared
     networks:
       subnet1:
-        ipv4_address: 172.1.0.22
+        ipv4_address: 172.0.1.22
 
   # SUBNET 2
   sub2-router:
@@ -135,9 +135,9 @@ services:
     restart: unless-stopped
     networks:
       main-network:
-        ipv4_address: 172.254.0.2
+        ipv4_address: 172.0.254.2
       subnet2:
-        ipv4_address: 172.2.0.100
+        ipv4_address: 172.0.2.100
 
   sub2-ubu12:
     build:
@@ -151,7 +151,7 @@ services:
         target: /shared
     networks:
       subnet2:
-        ipv4_address: 172.2.0.12
+        ipv4_address: 172.0.2.12
 
   sub2-ubu14:
     build:
@@ -165,7 +165,7 @@ services:
         target: /shared
     networks:
       subnet2:
-        ipv4_address: 172.2.0.14
+        ipv4_address: 172.0.2.14
   
   sub2-ubu16:
     build:
@@ -179,7 +179,7 @@ services:
         target: /shared
     networks:
       subnet2:
-        ipv4_address: 172.2.0.16
+        ipv4_address: 172.0.2.16
     
   sub2-ubu18:
     build:
@@ -193,7 +193,7 @@ services:
         target: /shared
     networks:
       subnet2:
-        ipv4_address: 172.2.0.18
+        ipv4_address: 172.0.2.18
   
   sub2-ubu20:
     build:
@@ -207,7 +207,7 @@ services:
         target: /shared
     networks:
       subnet2:
-        ipv4_address: 172.2.0.20
+        ipv4_address: 172.0.2.20
   
   sub2-ubu22:
     build:
@@ -221,7 +221,7 @@ services:
         target: /shared
     networks:
       subnet2:
-        ipv4_address: 172.2.0.22
+        ipv4_address: 172.0.2.22
 
   # SUBNET 3
   sub3-router:
@@ -232,9 +232,9 @@ services:
     restart: unless-stopped
     networks:
       main-network:
-        ipv4_address: 172.254.0.3
+        ipv4_address: 172.0.254.3
       subnet3:
-        ipv4_address: 172.3.0.100
+        ipv4_address: 172.0.3.100
 
   sub3-ubu12:
     build:
@@ -248,7 +248,7 @@ services:
         target: /shared
     networks:
       subnet3:
-        ipv4_address: 172.3.0.12
+        ipv4_address: 172.0.3.12
   
   sub3-ubu14:
     build:
@@ -261,7 +261,7 @@ services:
         target: /shared
     networks:
       subnet3:
-        ipv4_address: 172.3.0.14
+        ipv4_address: 172.0.3.14
     privileged: true
   
   sub3-ubu16:
@@ -275,7 +275,7 @@ services:
         target: /shared
     networks:
       subnet3:
-        ipv4_address: 172.3.0.16
+        ipv4_address: 172.0.3.16
     privileged: true
     
   sub3-ubu18:
@@ -289,7 +289,7 @@ services:
         target: /shared
     networks:
       subnet3:
-        ipv4_address: 172.3.0.18
+        ipv4_address: 172.0.3.18
     privileged: true
   
   sub3-ubu20:
@@ -303,7 +303,7 @@ services:
         target: /shared
     networks:
       subnet3:
-        ipv4_address: 172.3.0.20
+        ipv4_address: 172.0.3.20
     privileged: true
   
   sub3-ubu22:
@@ -317,7 +317,7 @@ services:
         target: /shared
     networks:
       subnet3:
-        ipv4_address: 172.3.0.22
+        ipv4_address: 172.0.3.22
     privileged: true
 
   # SUBNET 4
@@ -329,9 +329,9 @@ services:
     restart: unless-stopped
     networks:
       main-network:
-        ipv4_address: 172.254.0.4
+        ipv4_address: 172.0.254.4
       subnet4:
-        ipv4_address: 172.4.0.100
+        ipv4_address: 172.0.4.100
 
   sub4-ubu12:
     build:
@@ -345,7 +345,7 @@ services:
         target: /shared
     networks:
       subnet4:
-        ipv4_address: 172.4.0.12
+        ipv4_address: 172.0.4.12
   
   sub4-ubu14:
     build:
@@ -358,7 +358,7 @@ services:
         target: /shared
     networks:
       subnet4:
-        ipv4_address: 172.4.0.14
+        ipv4_address: 172.0.4.14
     privileged: true
   
   sub4-ubu16:
@@ -372,7 +372,7 @@ services:
         target: /shared
     networks:
       subnet4:
-        ipv4_address: 172.4.0.16
+        ipv4_address: 172.0.4.16
     privileged: true
     
   sub4-ubu18:
@@ -386,7 +386,7 @@ services:
         target: /shared
     networks:
       subnet4:
-        ipv4_address: 172.4.0.18
+        ipv4_address: 172.0.4.18
     privileged: true
   
   sub4-ubu20:
@@ -400,7 +400,7 @@ services:
         target: /shared
     networks:
       subnet4:
-        ipv4_address: 172.4.0.20
+        ipv4_address: 172.0.4.20
     privileged: true
   
   sub4-ubu22:
@@ -414,7 +414,7 @@ services:
         target: /shared
     networks:
       subnet4:
-        ipv4_address: 172.4.0.22
+        ipv4_address: 172.0.4.22
     privileged: true
 
 
@@ -425,29 +425,29 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.0.0.0/16
+        - subnet: 172.0.0.0/24
   main-network:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.254.0.0/16
+        - subnet: 172.0.254.0/24
   subnet1:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.1.0.0/16
+        - subnet: 172.0.1.0/24
   subnet2:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.2.0.0/16
+        - subnet: 172.0.2.0/24
   subnet3:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.3.0.0/16
+        - subnet: 172.0.3.0/24
   subnet4:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.4.0.0/16
+        - subnet: 172.0.4.0/24
