@@ -14,7 +14,7 @@ services:
       internet:
         ipv4_address: 172.0.0.254
 
-#ATTACKER
+  # ATTACKER
   attacker:
     build:
       dockerfile: Dockerfile/attacker/Dockerfile
