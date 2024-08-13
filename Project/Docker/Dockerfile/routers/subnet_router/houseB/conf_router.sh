@@ -7,7 +7,7 @@ IP_ADDR=$(ip -4 addr show dev eth0 | grep -Eo 'inet [0-9]+\.[0-9]+\.[0-9]+\.[0-9
 SUBNET=$(echo $IP_ADDR | cut -d '.' -f 1-3)
 
 # Define the new gateway IP using the extracted subnet part
-NEW_GATEWAY="$SUBNET.5"
+NEW_GATEWAY="$SUBNET.77"
 
 # Delete the existing default route and add the new one
 ip route del default

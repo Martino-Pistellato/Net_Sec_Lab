@@ -3,7 +3,7 @@ FROM frrouting/frr:latest
 
 # Copy the FRR configuration file into the container
 COPY Dockerfile/routers/subnet_router/houseB/frr.conf /etc/frr/frr.conf
-COPY Dockerfile/routers/subnet_router/conf_router.sh /usr/local/bin/conf_router.sh
+COPY Dockerfile/routers/subnet_router/houseB/conf_router.sh /usr/local/bin/conf_router.sh
 
 # Configure permissions
 RUN chmod +x /usr/local/bin/conf_router.sh
