@@ -15,3 +15,8 @@ ip route add default via $NEW_GATEWAY dev eth0
 
 # Enable NAT
 iptables -t nat -A POSTROUTING --out-interface eth0 -j MASQUERADE
+
+#Enable port forwarding
+iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 8082 -j DNAT --to-destination 192.168.2.3:8082
+iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE
+#sh -c "iptables-save > /etc/iptables/rules.v4"

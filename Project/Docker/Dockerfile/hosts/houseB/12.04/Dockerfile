@@ -26,6 +26,6 @@ COPY Dockerfile/hosts/houseB/conf_cont.sh /usr/local/bin/conf_cont.sh
 RUN chmod +x /usr/local/bin/conf_cont.sh
 
 # Expose ports to other containers
-EXPOSE 8080
+EXPOSE 8082
 
-CMD ["/bin/bash", "-c", "/usr/local/bin/conf_cont.sh && nc -l 8080 && sleep infinity"]
+CMD ["/bin/bash", "-c", "/usr/local/bin/conf_cont.sh && nc -l -k -p 8082 && sleep infinity"]

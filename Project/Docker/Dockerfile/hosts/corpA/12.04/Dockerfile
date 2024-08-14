@@ -28,4 +28,5 @@ RUN chmod +x /usr/local/bin/conf_cont.sh
 # Expose ports to other containers
 EXPOSE 8081
 
-CMD ["/bin/bash", "-c", "/usr/local/bin/conf_cont.sh && nc -l 8081 && sleep infinity"]
+CMD ["/bin/bash", "-c", "/usr/local/bin/conf_cont.sh && nc -l -k -p 8081 && sleep infinity"]
+

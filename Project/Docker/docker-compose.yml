@@ -37,274 +37,272 @@ services:
       web:
         ipv4_address: 172.0.254.6
 
-  # Corporate A
-  corpa-ubu12:
-    build:
-      dockerfile: Dockerfile/hosts/corpA/12.04/Dockerfile
-    container_name: corpA-ubu12
-    privileged: true
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    ports:
-      - "8081:8081"
-    networks:
-      corpA:
-        ipv4_address: 172.0.254.18
+  # # Corporate A
+  # corpa-ubu12:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/corpA/12.04/Dockerfile
+  #   container_name: corpA-ubu12
+  #   privileged: true
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     corpA:
+  #       ipv4_address: 172.0.254.18
 
-  corpa-ubu14:
-    build:
-      dockerfile: Dockerfile/hosts/corpA/14.04/Dockerfile
-    container_name: corpA-ubu14
-    privileged: true
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      corpA:
-        ipv4_address: 172.0.254.19
+  # corpa-ubu14:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/corpA/14.04/Dockerfile
+  #   container_name: corpA-ubu14
+  #   privileged: true
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     corpA:
+  #       ipv4_address: 172.0.254.19
   
-  corpa-ubu16:
-    build:
-      dockerfile: Dockerfile/hosts/corpA/16.04/Dockerfile
-    container_name: corpA-ubu16
-    privileged: true
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      corpA:
-        ipv4_address: 172.0.254.20
+  # corpa-ubu16:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/corpA/16.04/Dockerfile
+  #   container_name: corpA-ubu16
+  #   privileged: true
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     corpA:
+  #       ipv4_address: 172.0.254.20
     
-  copra-ubu18:
-    build:
-      dockerfile: Dockerfile/hosts/corpA/18.04/Dockerfile
-    container_name: corpA-ubu18
-    privileged: true
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      corpA:
-        ipv4_address: 172.0.254.21
+  # copra-ubu18:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/corpA/18.04/Dockerfile
+  #   container_name: corpA-ubu18
+  #   privileged: true
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     corpA:
+  #       ipv4_address: 172.0.254.21
   
-  corpa-ubu20:
-    build:
-      dockerfile: Dockerfile/hosts/corpA/20.04/Dockerfile
-    container_name: corpA-ubu20
-    privileged: true
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      corpA:
-        ipv4_address: 172.0.254.22
+  # corpa-ubu20:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/corpA/20.04/Dockerfile
+  #   container_name: corpA-ubu20
+  #   privileged: true
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     corpA:
+  #       ipv4_address: 172.0.254.22
   
-  corpa-ubu22:
-    build:
-      dockerfile: Dockerfile/hosts/corpA/22.04/Dockerfile
-    container_name: corpA-ubu22
-    privileged: true
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      corpA:
-        ipv4_address: 172.0.254.23
+  # corpa-ubu22:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/corpA/22.04/Dockerfile
+  #   container_name: corpA-ubu22
+  #   privileged: true
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     corpA:
+  #       ipv4_address: 172.0.254.23
 
-  # Corporate B
-  corpb-ubu12:
-    build:
-      dockerfile: Dockerfile/hosts/corpB/12.04/Dockerfile
-    container_name: corpB-ubu12
-    privileged: true
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      corpB:
-        ipv4_address: 172.0.254.34
+  # # Corporate B
+  # corpb-ubu12:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/corpB/12.04/Dockerfile
+  #   container_name: corpB-ubu12
+  #   privileged: true
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     corpB:
+  #       ipv4_address: 172.0.254.34
 
-  corpb-ubu14:
-    build:
-      dockerfile: Dockerfile/hosts/corpB/14.04/Dockerfile
-    container_name: corpB-ubu14
-    restart: unless-stopped
-    privileged: true
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      corpB:
-        ipv4_address: 172.0.254.35
+  # corpb-ubu14:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/corpB/14.04/Dockerfile
+  #   container_name: corpB-ubu14
+  #   restart: unless-stopped
+  #   privileged: true
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     corpB:
+  #       ipv4_address: 172.0.254.35
   
-  corpb-ubu16:
-    build:
-      dockerfile: Dockerfile/hosts/corpB/16.04/Dockerfile
-    container_name: corpB-ubu16
-    restart: unless-stopped
-    privileged: true
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      corpB:
-        ipv4_address: 172.0.254.36
+  # corpb-ubu16:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/corpB/16.04/Dockerfile
+  #   container_name: corpB-ubu16
+  #   restart: unless-stopped
+  #   privileged: true
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     corpB:
+  #       ipv4_address: 172.0.254.36
     
-  corpb-ubu18:
-    build:
-      dockerfile: Dockerfile/hosts/corpB/18.04/Dockerfile
-    container_name: corpB-ubu18
-    restart: unless-stopped
-    privileged: true
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      corpB:
-        ipv4_address: 172.0.254.37
+  # corpb-ubu18:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/corpB/18.04/Dockerfile
+  #   container_name: corpB-ubu18
+  #   restart: unless-stopped
+  #   privileged: true
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     corpB:
+  #       ipv4_address: 172.0.254.37
   
-  corpb-ubu20:
-    build:
-      dockerfile: Dockerfile/hosts/corpB/20.04/Dockerfile
-    container_name: corpB-ubu20
-    restart: unless-stopped
-    privileged: true
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      corpB:
-        ipv4_address: 172.0.254.38
+  # corpb-ubu20:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/corpB/20.04/Dockerfile
+  #   container_name: corpB-ubu20
+  #   restart: unless-stopped
+  #   privileged: true
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     corpB:
+  #       ipv4_address: 172.0.254.38
   
-  corpb-ubu22:
-    build:
-      dockerfile: Dockerfile/hosts/corpB/22.04/Dockerfile
-    container_name: corpB-ubu22
-    restart: unless-stopped
-    privileged: true
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      corpB:
-        ipv4_address: 172.0.254.39
+  # corpb-ubu22:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/corpB/22.04/Dockerfile
+  #   container_name: corpB-ubu22
+  #   restart: unless-stopped
+  #   privileged: true
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     corpB:
+  #       ipv4_address: 172.0.254.39
 
-  # HouseA
-  housea-router:
-    build:
-      dockerfile: Dockerfile/routers/subnet_router/houseA/Dockerfile
-    container_name: houseA-router
-    privileged: true
-    restart: unless-stopped
-    networks:
-      houseA:
-        ipv4_address: 172.0.254.50
-      houseA-private:
-        ipv4_address: 192.168.0.2
+  # # HouseA
+  # housea-router:
+  #   build:
+  #     dockerfile: Dockerfile/routers/subnet_router/houseA/Dockerfile
+  #   container_name: houseA-router
+  #   privileged: true
+  #   restart: unless-stopped
+  #   networks:
+  #     houseA:
+  #       ipv4_address: 172.0.254.50
+  #     houseA-private:
+  #       ipv4_address: 192.168.0.2
 
-  housea-ubu12:
-    build:
-      dockerfile: Dockerfile/hosts/houseA/12.04/Dockerfile
-    container_name: houseA-ubu12
-    privileged: true
-    restart: unless-stopped 
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      houseA-private:
-        ipv4_address: 192.168.0.3
+  # housea-ubu12:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/houseA/12.04/Dockerfile
+  #   container_name: houseA-ubu12
+  #   privileged: true
+  #   restart: unless-stopped 
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     houseA-private:
+  #       ipv4_address: 192.168.0.3
   
-  housea-ubu14:
-    build:
-      dockerfile: Dockerfile/hosts/houseA/14.04/Dockerfile
-    container_name: houseA-ubu14
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      houseA-private:
-        ipv4_address: 192.168.0.4
-    privileged: true
+  # housea-ubu14:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/houseA/14.04/Dockerfile
+  #   container_name: houseA-ubu14
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     houseA-private:
+  #       ipv4_address: 192.168.0.4
+  #   privileged: true
   
-  housea-ubu16:
-    build:
-      dockerfile: Dockerfile/hosts/houseA/16.04/Dockerfile
-    container_name: houseA-ubu16
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      houseA-private:
-        ipv4_address: 192.168.0.5
-    privileged: true
+  # housea-ubu16:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/houseA/16.04/Dockerfile
+  #   container_name: houseA-ubu16
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     houseA-private:
+  #       ipv4_address: 192.168.0.5
+  #   privileged: true
     
-  housea-ubu18:
-    build:
-      dockerfile: Dockerfile/hosts/houseA/18.04/Dockerfile
-    container_name: houseA-ubu18
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      houseA-private:
-        ipv4_address: 192.168.0.6
-    privileged: true
+  # housea-ubu18:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/houseA/18.04/Dockerfile
+  #   container_name: houseA-ubu18
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     houseA-private:
+  #       ipv4_address: 192.168.0.6
+  #   privileged: true
   
-  housea-ubu20:
-    build:
-      dockerfile: Dockerfile/hosts/houseA/20.04/Dockerfile
-    container_name: houseA-ubu20
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      houseA-private:
-        ipv4_address: 192.168.0.7
-    privileged: true
+  # housea-ubu20:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/houseA/20.04/Dockerfile
+  #   container_name: houseA-ubu20
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     houseA-private:
+  #       ipv4_address: 192.168.0.7
+  #   privileged: true
   
-  housea-ubu22:
-    build:
-      dockerfile: Dockerfile/hosts/houseA/22.04/Dockerfile
-    container_name: houseA-ubu22
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      houseA-private:
-        ipv4_address: 192.168.0.8
-    privileged: true
+  # housea-ubu22:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/houseA/22.04/Dockerfile
+  #   container_name: houseA-ubu22
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     houseA-private:
+  #       ipv4_address: 192.168.0.8
+  #   privileged: true
 
   # HouseB
   houseb-router:
@@ -329,25 +327,23 @@ services:
       - type: bind
         source: ./shared
         target: /shared
-    ports:
-      - "8080:8080"
     networks:
       houseB-private:
         ipv4_address: 192.168.2.3
   
-  houseb-ubu14:
-    build:
-      dockerfile: Dockerfile/hosts/houseB/14.04/Dockerfile
-    container_name: houseB-ubu14
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      houseB-private:
-        ipv4_address: 192.168.2.4
-    privileged: true
+  # houseb-ubu14:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/houseB/14.04/Dockerfile
+  #   container_name: houseB-ubu14
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     houseB-private:
+  #       ipv4_address: 192.168.2.4
+  #   privileged: true
   
   houseb-ubu16:
     build:
@@ -363,47 +359,47 @@ services:
         ipv4_address: 192.168.2.5
     privileged: true
     
-  houseb-ubu18:
-    build:
-      dockerfile: Dockerfile/hosts/houseB/18.04/Dockerfile
-    container_name: houseB-ubu18
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      houseB-private:
-        ipv4_address: 192.168.2.6
-    privileged: true
+  # houseb-ubu18:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/houseB/18.04/Dockerfile
+  #   container_name: houseB-ubu18
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     houseB-private:
+  #       ipv4_address: 192.168.2.6
+  #   privileged: true
   
-  houseb-ubu20:
-    build:
-      dockerfile: Dockerfile/hosts/houseB/20.04/Dockerfile
-    container_name: houseB-ubu20
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      houseB-private:
-        ipv4_address: 192.168.2.7
-    privileged: true
+  # houseb-ubu20:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/houseB/20.04/Dockerfile
+  #   container_name: houseB-ubu20
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     houseB-private:
+  #       ipv4_address: 192.168.2.7
+  #   privileged: true
   
-  houseb-ubu22:
-    build:
-      dockerfile: Dockerfile/hosts/houseB/22.04/Dockerfile
-    container_name: houseB-ubu22
-    restart: unless-stopped
-    volumes:
-      - type: bind
-        source: ./shared
-        target: /shared
-    networks:
-      houseB-private:
-        ipv4_address: 192.168.2.8
-    privileged: true
+  # houseb-ubu22:
+  #   build:
+  #     dockerfile: Dockerfile/hosts/houseB/22.04/Dockerfile
+  #   container_name: houseB-ubu22
+  #   restart: unless-stopped
+  #   volumes:
+  #     - type: bind
+  #       source: ./shared
+  #       target: /shared
+  #   networks:
+  #     houseB-private:
+  #       ipv4_address: 192.168.2.8
+  #   privileged: true
 
 
 ### NETWORKS ###
