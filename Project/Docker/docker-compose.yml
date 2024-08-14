@@ -49,7 +49,7 @@ services:
         source: ./shared
         target: /shared
     ports:
-      - "80:80"
+      - "8081:8081"
     networks:
       corpA:
         ipv4_address: 172.0.254.18
@@ -419,46 +419,40 @@ networks:
     ipam:
       config:
         - subnet: 172.0.254.0/28
-        
+
   corpA:
     driver: bridge
     ipam:
       config:
         - subnet: 172.0.254.16/28  # host 17-30
-          #gateway: 172.0.254.5
 
   corpB:
     driver: bridge
     ipam:
       config:
         - subnet: 172.0.254.32/28
-          #gateway: 172.0.254.5
 
   houseA:
     driver: bridge
     ipam:
       config:
         - subnet: 172.0.254.48/28
-          #gateway: 172.0.254.5
 
   houseA-private:
     driver: bridge
     ipam:
       config:
         - subnet: 192.168.0.0/28
-          #gateway: 192.168.0.2
 
   houseB:
     driver: bridge
     ipam:
       config:
         - subnet: 172.0.254.64/28
-          #gateway: 172.0.254.5
   
   houseB-private:
     driver: bridge
     ipam:
       config:
         - subnet: 192.168.2.0/28
-          #gateway: 192.168.1.2
 

@@ -25,4 +25,7 @@ COPY Dockerfile/hosts/corpA/conf_cont.sh /usr/local/bin/conf_cont.sh
 # Make the script executable
 RUN chmod +x /usr/local/bin/conf_cont.sh
 
-CMD ["/bin/bash", "-c", "/usr/local/bin/conf_cont.sh && nc -l 80 && sleep infinity"]
+# Expose ports to other containers
+EXPOSE 8081
+
+CMD ["/bin/bash", "-c", "/usr/local/bin/conf_cont.sh && nc -l 8081 && sleep infinity"]
