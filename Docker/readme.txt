@@ -7,13 +7,10 @@ First-setup.sh:
 - builds the project
 - creates networks and runs container
 
-CAUTION! If you will edit the docker-compose.yml file, you MUST run rebuild.sh before launch docker compose up. Otherwise, you will encounter network conflicts.
+CAUTION! If you will edit the docker-compose.yml file or the Dockerfiles, you MUST run rebuild.sh before launch docker compose up. Otherwise, you will encounter conflicts.
 
 Rebuild.sh:
 - DELETES ALL STOPPED CONTAINERS, UNUSED NETWORKS, IMAGES AND VOLUMES
 - builds again the project
 - creates networks and runs containers
 
-
-
-Last update: 27/07/2024

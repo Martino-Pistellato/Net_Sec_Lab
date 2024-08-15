@@ -2,8 +2,8 @@
 FROM frrouting/frr:latest
 
 # Copy the FRR configuration file into the container
-COPY Dockerfile/routers/web-router/frr.conf /etc/frr/frr.conf
-COPY Dockerfile/routers/web-router/enable_nat.sh /usr/local/bin/enable_nat.sh
+COPY Dockerfile/routers/web_router/frr.conf /etc/frr/frr.conf
+COPY Dockerfile/routers/web_router/enable_nat.sh /usr/local/bin/enable_nat.sh
 
 # Configure permissions
 RUN chmod +x /usr/local/bin/enable_nat.sh
