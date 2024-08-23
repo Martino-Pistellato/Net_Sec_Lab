@@ -1,0 +1,56 @@
+### CONTAINER ###
+services:
+
+  # Attacker
+  attacker:
+      build:
+        dockerfile: Dockerfile/attacker/Dockerfile
+      container_name: attacker
+      privileged: true
+      restart: unless-stopped
+      volumes:
+        - type: bind
+          source: ./shared
+          target: /shared
+      networks:
+        test-net:
+          ipv4_address: 10.0.0.5
+
+  # Target
+  target:
+      build:
+        dockerfile: Dockerfile/target/Dockerfile
+      container_name: target
+      privileged: true
+      restart: unless-stopped
+      volumes:
+        - type: bind
+          source: ./shared
+          target: /shared
+      networks:
+        test-net:
+          ipv4_address: 10.0.0.6
+  
+  # Zombie
+  zombie:
+      build:
+        dockerfile: Dockerfile/zombie/Dockerfile
+      container_name: zombie
+      privileged: true
+      restart: unless-stopped
+      volumes:
+        - type: bind
+          source: ./shared
+          target: /shared
+      networks:
+        test-net:
+          ipv4_address: 10.0.0.7
+
+### NETWORK ###
+networks:
+  test-net:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.0.0.0/24
