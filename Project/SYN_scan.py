@@ -49,15 +49,15 @@ def backlog_syn_scan(bcklg_size, zombie_ip, zombie_port, target_ip): # subnet mu
     packets_number = int(bcklg_size*3/4) # we want to fill only 3/4 of the whole backlog in order not to DoS the zombie
     syn_packets_number = int(packets_number/2) # we send half of the total size of packets as SYN packets
     canaries_number = packets_number - syn_packets_number # the other half is filled with canaries
-    ports = np.random.default_rng().choice([x for x in range(1024, 49151)], syn_packets_number, replace=False) # we use random ports, doesn't matter if they're open 
+    ports = np.random.default_rng().choice([x for x in range(49151, 65535)], syn_packets_number, replace=False) # we use random ports, doesn't matter if they're open 
     
     packets = []
     
     
     
-    for port in ports:
-        packet = scapy.IP(dst=zombie_ip, src=target_ip)/scapy.TCP(dport=zombie_port, sport=port, flags="S")
-        packets.append(packet)
+    # for port in ports:
+    #     packet = scapy.IP(dst=zombie_ip, src=target_ip)/scapy.TCP(dport=zombie_port, sport=port, flags="S")
+    #     packets.append(packet)
         
     for port in ports:
         packet = scapy.IP(dst=zombie_ip)/scapy.TCP(dport=zombie_port, sport=port, flags="S", seq=1)
