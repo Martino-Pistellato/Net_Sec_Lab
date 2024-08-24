@@ -53,6 +53,8 @@ def backlog_syn_scan(bcklg_size, zombie_ip, zombie_port, target_ip): # subnet mu
     
     packets = []
     
+    
+    
     for port in ports:
         packet = scapy.IP(dst=zombie_ip, src=target_ip)/scapy.TCP(dport=zombie_port, sport=port, flags="S")
         packets.append(packet)
@@ -69,21 +71,22 @@ def backlog_syn_scan(bcklg_size, zombie_ip, zombie_port, target_ip): # subnet mu
 
 
     # for _ in range(3):
-    answered, _ = scapy.sr(packets, inter=1/5) # sending SYN packets mixed with canaries #TODO put inter=1/5
+    answered, _ = scapy.sr(packets, inter=1/5, timeout=1) # sending SYN packets mixed with canaries #TODO put inter=1/5
     loss = canaries_number - len(answered)
     
-    answered, unanswered = scapy.sr(probes, timeout=5) # "pinging" the canaries, is the timeout ok? #TODO put inter=1/5
+    answered, _ = scapy.sr(probes, timeout=1) # "pinging" the canaries, is the timeout ok? #TODO put inter=1/5
     
     ack = 0
-    for response in answered:
+    sa = 0
+    for _, response in answered:
         if response is not None:
             tcp_header = response.getlayer(scapy.TCP) if response.haslayer(scapy.TCP) else None
-            if tcp_header is not None and tcp_header.flags & (0x10):
+            if tcp_header is not None and tcp_header.flags == 0x10:
                 ack += 1
-            elif tcp_header.flags & 0x02:
-                print("risposta con synack")
+            elif tcp_header.flags == 0x12:
+                sa += 1
                 
-    print(f"ACKs received: {ack}, Total canaries: {canaries_number}\n") 
+    print(f"ACKs received: {ack}, Total canaries: {canaries_number}, SA = {sa}\n") 
                 
     # trials.append({'loss': loss, 'ack': ack, 'k': canaries_number - ack})
     # sleep(packets_number/5) # wait for the backlog to be processed or cleaned
