@@ -4,7 +4,42 @@ from scipy.stats import hypergeom
 from time import sleep
 
 # https://scapy.readthedocs.io/en/latest/usage.html
-# 3° pezzo di codice, implementa la tecnica di backlog scan
+
+def find_p_value(trials, canaries_number, bcklg_size):
+    loss1, loss2, loss3 = trials[0]['loss'], trials[1]['loss'], trials[2]['loss']
+    ack1, ack2, ack3 = trials[0]['ack'], trials[1]['ack'], trials[2]['ack']
+    k1, k2, k3 = trials[0]['k'], trials[1]['k'], trials[2]['k']
+    
+    if loss1 != 0 and loss2 != 0 and loss3 != 0:
+        if loss1 == min(loss1, loss2, loss3):
+            loss, ack, k = loss1, ack1, k1
+        elif loss2 == min(loss1, loss2, loss3):
+            loss, ack, k = loss2, ack2, k2
+        else:
+            loss, ack, k = loss3, ack3, k3
+    else:
+        zero_losses = [loss1, loss2, loss3].count(0)
+        if zero_losses == 1:
+            if loss1 == 0:
+                loss, ack, k = loss1, ack1, k1
+            elif loss2 == 0:
+                loss, ack, k = loss2, ack2, k2
+            else:
+                loss, ack, k = loss3, ack3, k3
+        else:
+            if k1 == max(k1, k2, k3) and loss1 == 0:
+                loss, ack, k = loss1, ack1, k1
+            elif k2 == max(k1, k2, k3) and loss2 == 0:
+                loss, ack, k = loss2, ack2, k2
+            else:
+                loss, ack, k = loss3, ack3, k3
+
+    K = canaries_number - loss # - (packets_number/5)
+    N = 2*K
+    n = N - (bcklg_size/2) # - (packets_number/5)
+    p_value = hypergeom.sf(k, N, K, n) # or cdf?
+
+    return p_value
 
 def backlog_syn_scan(bcklg_size, zombie_ip, zombie_port, target_subnet): # subnet must be in format "192.168.1"
     packets_number = int(bcklg_size*3/4) # we want to fill only 3/4 of the whole backlog in order not to DoS the zombie
@@ -22,9 +57,9 @@ def backlog_syn_scan(bcklg_size, zombie_ip, zombie_port, target_subnet): # subne
         packets = np.random.choice(np.concatenate([syn_packets, canaries]), packets_number, replace=False)  # randomly mixing SYN packets with canaries
 
         for _ in range(3):
-            scapy.send(packets, inter=1./5) # sending SYN packets mixed with canaries
+            answered, unanswered = scapy.send(packets, inter=1./5) # sending SYN packets mixed with canaries
+            loss = canaries_number - len(answered)
             answered, unanswered = scapy.sr(probes, inter=1./5, timeout=1) # "pinging" the canaries, is the timeout ok?
-            loss = len(unanswered)
             
             ack = 0 # we need to check if target is alive  
             for packet, response in answered: 
@@ -35,38 +70,6 @@ def backlog_syn_scan(bcklg_size, zombie_ip, zombie_port, target_subnet): # subne
             trials.append({'loss': loss, 'ack': ack, 'k': canaries_number - ack})
             sleep(packets_number/5) # wait for the backlog to be processed or cleaned
         
-        loss1, loss2, loss3 = trials[0]['loss'], trials[1]['loss'], trials[2]['loss']
-        ack1, ack2, ack3 = trials[0]['ack'], trials[1]['ack'], trials[2]['ack']
-        k1, k2, k3 = trials[0]['k'], trials[1]['k'], trials[2]['k']
-        
-        if loss1 != 0 and loss2 != 0 and loss3 != 0:
-            if loss1 == min(loss1, loss2, loss3):
-                loss, ack, k = loss1, ack1, k1
-            elif loss2 == min(loss1, loss2, loss3):
-                loss, ack, k = loss2, ack2, k2
-            else:
-                loss, ack, k = loss3, ack3, k3
-        else:
-            zero_losses = [loss1, loss2, loss3].count(0)
-            if zero_losses == 1:
-                if loss1 == 0:
-                    loss, ack, k = loss1, ack1, k1
-                elif loss2 == 0:
-                    loss, ack, k = loss2, ack2, k2
-                else:
-                    loss, ack, k = loss3, ack3, k3
-            else:
-                if k1 == max(k1, k2, k3):
-                    loss, ack, k = loss1, ack1, k1
-                elif k2 == max(k1, k2, k3):
-                    loss, ack, k = loss2, ack2, k2
-                else:
-                    loss, ack, k = loss3, ack3, k3
-
-        K = canaries_number - loss - (packets_number/5)
-        N = 2*K
-        n = N - (bcklg_size/2) - (packets_number/5)
-        p_value = hypergeom.cdf(k, N, K, n) # or sf?
-
+        p_value = find_p_value(trials, canaries_number, bcklg_size)
         res.append((target_ip, p_value))
     return res
