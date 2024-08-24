@@ -106,16 +106,12 @@ def infer_backlog_size(target_ip, target_port):
 
 
 
-if __name__ == '__main__':
-    if len(sys.argv) != 3:
-        print("Usage: python syn_backlog_scan.py <target_ip> <target_port>")
-        sys.exit(1)
-    
-    target_ip = sys.argv[1]
-    target_port = int(sys.argv[2])
-
+def main(target_ip, target_port):
     inferred_size = infer_backlog_size(target_ip, target_port)
+
     if inferred_size:
         print(f"Inferred SYN backlog size for {target_ip}:{target_port} is {inferred_size}.")
     else:
         print(f"Could not determine SYN backlog size for {target_ip}:{target_port}.")
+        
+    return inferred_size
