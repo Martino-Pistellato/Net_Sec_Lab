@@ -49,21 +49,10 @@ def backlog_syn_scan(bcklg_size, zombie_ip, zombie_port, target_ip): # subnet mu
     canaries_number = packets_number - syn_packets_number # the other half is filled with canaries
     ports = np.random.default_rng().choice([x for x in range(1024, 49151)], syn_packets_number, replace=False) # we use random ports, doesn't matter if they're open 
     
-    packets = []
-    
-    for port in ports:
-        packet = scapy.IP(dst=zombie_ip, src=target_ip)/scapy.TCP(dport=zombie_port, sport=port, flags="S")
-        packets.append(packet)
-        
-    for port in ports:
-        packet = scapy.IP(dst=zombie_ip)/scapy.TCP(dport=zombie_port, sport=port, flags="S", seq=1)
-        packets.append(packet)
-        
-    
-    # syn_packets = scapy.IP(dst=zombie_ip, src=target_ip)/scapy.TCP(dport=zombie_port, sport=ports[0:packets_number], flags="S")
-    # canaries = scapy.IP(dst=zombie_ip)/scapy.TCP(dport=zombie_port, sport=ports[0:canaries_number], flags="S", seq=1) # we need seq = 1 because probes need seq-=1
-    probes = scapy.IP(dst=zombie_ip)/scapy.TCP(dport=zombie_port, sport=ports, flags="S", seq=0) # used to "ping" the canaries
-    packets = np.random.choice(packets, packets_number, replace=False)  # randomly mixing SYN packets with canaries
+    syn_packets = scapy.IP(dst=zombie_ip, src=target_ip)/scapy.TCP(dport=zombie_port, sport=ports[0:packets_number], flags="S")
+    canaries = scapy.IP(dst=zombie_ip)/scapy.TCP(dport=zombie_port, sport=ports[0:canaries_number], flags="S", seq=1) # we need seq = 1 because probes need seq-=1
+    probes = scapy.IP(dst=zombie_ip)/scapy.TCP(dport=zombie_port, sport=ports[0:canaries_number], flags="S", seq=0) # used to "ping" the canaries
+    packets = np.random.choice(np.concatenate([syn_packets, canaries]), packets_number, replace=False)  # randomly mixing SYN packets with canaries
 
     for _ in range(3):
         answered, unanswered = scapy.send(packets, inter=1./5) # sending SYN packets mixed with canaries
