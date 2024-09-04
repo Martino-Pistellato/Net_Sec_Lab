@@ -11,28 +11,6 @@
 #define PORT 8080
 #define BACKLOG 16
 
-void handle_client(int client_socket) {
-    char buffer[1024] = {0};
-    char *message = "Hello from server\n";
-    
-    // Send a welcome message to the client
-    send(client_socket, message, strlen(message), 0);
-    printf("Message sent to client\n");
-
-    // Continuously read and respond to client messages
-    int bytes_read;
-    while ((bytes_read = read(client_socket, buffer, sizeof(buffer))) > 0) {
-        printf("Received from client: %s", buffer);
-        // Echo the message back to the client
-        send(client_socket, buffer, bytes_read, 0);
-        memset(buffer, 0, sizeof(buffer));
-    }
-
-    // Client disconnected
-    printf("Client disconnected\n");
-    close(client_socket);
-}
-
 void sigchld_handler(int s) {
     // Wait for all dead processes
     // We use a loop to handle multiple children that terminated simultaneously
@@ -86,29 +64,13 @@ int main() {
         exit(EXIT_FAILURE);
     }
 
-    printf("Server is listening on port %d with a backlog size of %d\n", PORT, BACKLOG);
-
-    // Server runs indefinitely
-    while (1) {
-        // Accept a new connection
-        if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
-            perror("accept failed");
-            continue;
-        }
-
-        // Fork a new process to handle the client
-        if (fork() == 0) {
-            // Child process
-            close(server_fd); // Child doesn't need the listener
-            handle_client(new_socket);
-            exit(0);
-        }
-
-        // Parent process
-        close(new_socket); // Parent doesn't need this socket
+    // Accept a new connection
+    if ((new_socket = accept(server_fd, (struct sockaddr *)&address, (socklen_t*)&addrlen)) < 0) {
+        perror("accept failed");
+        exit(EXIT_FAILURE);
     }
 
-    // Close the server socket (unreachable in this example)
+    close(new_socket);
     close(server_fd);
 
     return 0;
