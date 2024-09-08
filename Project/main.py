@@ -3,7 +3,7 @@ import sys
 
 def main(zombie_ip, zombie_port, target_ip):
     backlog_size = backlog.main(zombie_ip, zombie_port)
-    p_value = SYN_scan.backlog_syn_scan(128, zombie_ip, zombie_port, target_ip)
+    p_value = SYN_scan.backlog_syn_scan(backlog_size, zombie_ip, zombie_port, target_ip)
     print(f"Target ip: {target_ip}, Backlog size: {backlog_size}, P-value: {p_value}")
 
 if __name__ == "__main__":
