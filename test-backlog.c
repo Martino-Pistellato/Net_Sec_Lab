@@ -11,27 +11,11 @@
 #define PORT 8080
 #define BACKLOG 16
 
-void sigchld_handler(int s) {
-    // Wait for all dead processes
-    // We use a loop to handle multiple children that terminated simultaneously
-    while (waitpid(-1, NULL, WNOHANG) > 0);
-}
-
 int main() {
     int server_fd, new_socket;
     struct sockaddr_in address;
     int opt = 1;
     int addrlen = sizeof(address);
-
-    // Set up the SIGCHLD signal handler to clean up zombie processes
-    struct sigaction sa;
-    sa.sa_handler = sigchld_handler;
-    sigemptyset(&sa.sa_mask);
-    sa.sa_flags = SA_RESTART;
-    if (sigaction(SIGCHLD, &sa, NULL) == -1) {
-        perror("sigaction failed");
-        exit(EXIT_FAILURE);
-    }
 
     // Creating socket file descriptor
     if ((server_fd = socket(AF_INET, SOCK_STREAM, 0)) == 0) {
